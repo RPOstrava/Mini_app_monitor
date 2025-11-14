@@ -8,4 +8,4 @@ Run in Kubernetes - AWS EKS
 
 Connect the CI/CD pipeline from GitLab
 
-Finally, we will extend it with Terraform, Prometheus and Grafana
+Finally, we will extend it with Terraform, Prometheus and Grafana.
