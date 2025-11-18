@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mini-app-monitor-deployment  # Jméno
+  labels:
+    app: mini-app-monitor
+spec:
+  replicas: 2                      # Počet instancí 
+  selector:
+    matchLabels:
+      app: mini-app-monitor        # Jakou aplikaci ma k8s zpracovat
+  template:
+    metadata:
+      labels:
+        app: mini-app-monitor
+    spec:
+      containers:
+        - name: mini-app-monitor
+          image: <AWS_ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/mini-app-monitor:latest # Docker image z ECR
+          ports:
+            - containerPort: 5000  # Port, na kterém běží Flask (z requirements.txt)
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+
