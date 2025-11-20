@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mini-app-monitor-service  # Jméno služby
+spec:
+  type: LoadBalancer               # AWS ELB automaticky vytvoří veřejný IP
+  selector:
+    app: mini-app-monitor          # Slučujeme se správnými pod-y
+  ports:
+    - protocol: TCP
+      port: 80                     # Port, na kterém služba naslouchá externě
+      targetPort: 5000             # Port aplikace uvnitř podu
