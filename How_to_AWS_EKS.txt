@@ -1,0 +1,21 @@
+aws ecr get-login-password --region <REGION> | docker login --username AWS --password-stdin <AWS_ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com
+
+docker tag mini-app-monitor:latest <AWS_ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/mini-app-monitor:latest
+
+docker push <AWS_ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/mini-app-monitor:latest
+
+pripojeni kubectl ke clusteru
+
+aws eks --region <REGION> update-kubeconfig --name <EKS_CLUSTER_NAME>
+kubectl get nodes   # Ověření spojení
+
+nasazeni
+
+kubectl apply -f kubernetes/deployment.yaml
+kubectl apply -f kubernetes/service.yaml
+
+verejny endpoint
+
+kubectl get svc mini-app-monitor-service
+
+ve sloupci EXTERNAL-IP bude adresa
